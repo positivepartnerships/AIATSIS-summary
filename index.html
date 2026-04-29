@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIATSIS Modules – Summary for Framework Working Group</title>
+  <style>
+    :root {
+      --ochre:       #C4622D;
+      --ochre-light: #F5EAE0;
+      --green:       #4A8C3F;
+      --green-light: #EEF4EC;
+      --green-border:#B2CCA8;
+      --blue:        #2A6496;
+      --blue-light:  #EAF2F8;
+      --blue-border: #A8C4D4;
+      --purple:      #6A4C93;
+      --purple-light:#F0EBF8;
+      --purple-border:#C8B8E0;
+      --dark:        #2C2C2C;
+      --mid:         #555;
+      --light-bg:    #FAFAF8;
+      --card-bg:     #FFFFFF;
+      --border:      #E0D8D0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--light-bg);
+      color: var(--dark);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--ochre);
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+    header .org {
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      font-family: Arial, sans-serif;
+      margin-bottom: 0.6rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+    header .meta {
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      opacity: 0.7;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #3A2218;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav a {
+      display: inline-block;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 0.75rem 0.9rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* ── INTRO BOX ── */
+    .intro {
+      background: var(--ochre-light);
+      border: 1px solid #DFC8B6;
+      border-left: 5px solid var(--ochre);
+      border-radius: 4px;
+      padding: 1.4rem 1.8rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.97rem;
+    }
+    .intro p + p { margin-top: 0.6rem; }
+
+    /* ── SECTION WRAPPERS ── */
+    .section {
+      margin-bottom: 2.8rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      font-family: Arial, sans-serif;
+      margin-bottom: 0.3rem;
+    }
+    .section h2 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      color: var(--dark);
+      border-bottom: 2px solid var(--ochre);
+      padding-bottom: 0.35rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── Q NUMBER BADGE ── */
+    .q-badge {
+      display: inline-block;
+      background: var(--ochre);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: bold;
+      width: 1.8rem;
+      height: 1.8rem;
+      line-height: 1.8rem;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.6rem;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* ── CONTENT CARDS ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 1.3rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      color: var(--ochre);
+      margin-bottom: 0.5rem;
+    }
+    .card p, .card li {
+      font-size: 0.96rem;
+      color: var(--mid);
+    }
+    .card ul {
+      padding-left: 1.3rem;
+      margin-top: 0.3rem;
+    }
+    .card ul li { margin-bottom: 0.35rem; }
+
+    /* ── COLOURED CALLOUT VARIATIONS ── */
+    .callout {
+      border-radius: 4px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 1rem;
+      font-size: 0.96rem;
+    }
+    .callout .ct {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      font-weight: bold;
+    }
+    .callout ul { padding-left: 1.3rem; margin-top: 0.3rem; }
+    .callout ul li { margin-bottom: 0.4rem; }
+
+    .callout.green  { background: var(--green-light);  border: 1px solid var(--green-border);  border-left: 4px solid var(--green);  }
+    .callout.green .ct  { color: #2F6B26; }
+    .callout.blue   { background: var(--blue-light);   border: 1px solid var(--blue-border);   border-left: 4px solid var(--blue);   }
+    .callout.blue .ct   { color: #1A4A6E; }
+    .callout.purple { background: var(--purple-light); border: 1px solid var(--purple-border); border-left: 4px solid var(--purple); }
+    .callout.purple .ct { color: #4A2C73; }
+    .callout.ochre  { background: var(--ochre-light);  border: 1px solid #DFC8B6;              border-left: 4px solid var(--ochre);  }
+    .callout.ochre .ct  { color: #7A3B1E; }
+
+    /* ── QUOTES ── */
+    blockquote {
+      border-left: 3px solid var(--ochre);
+      margin: 0.8rem 0;
+      padding: 0.5rem 1rem;
+      background: var(--ochre-light);
+      font-style: italic;
+      font-size: 0.96rem;
+      border-radius: 0 4px 4px 0;
+    }
+    blockquote cite {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.82rem;
+      font-style: normal;
+      color: var(--ochre);
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── ACTION ITEMS ── */
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 640px) { .action-grid { grid-template-columns: 1fr; } }
+
+    .action-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+    }
+    .action-item.blue-top  { border-top-color: var(--blue);   }
+    .action-item.purple-top{ border-top-color: var(--purple); }
+
+    .action-item .ai-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+    .action-item p, .action-item li {
+      font-size: 0.93rem;
+      color: var(--mid);
+    }
+    .action-item ul { padding-left: 1.2rem; }
+    .action-item ul li { margin-bottom: 0.3rem; }
+
+    /* ── MODULE REFERENCE (collapsible-style) ── */
+    details {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--ochre);
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+    summary {
+      padding: 0.9rem 1.2rem;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: bold;
+      color: var(--ochre);
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before {
+      content: '▶ ';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+    details[open] summary::before { content: '▼ '; }
+    .details-body {
+      padding: 0 1.4rem 1.2rem;
+      font-size: 0.95rem;
+      color: var(--mid);
+      border-top: 1px solid var(--border);
+    }
+    .details-body p { margin: 0.6rem 0; }
+    .details-body blockquote { margin: 0.6rem 0; }
+
+    /* ── TAGS ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.6rem;
+    }
+    .tag {
+      background: #EDE0D4;
+      color: #7A3B1E;
+      font-size: 0.73rem;
+      font-family: Arial, sans-serif;
+      padding: 0.18rem 0.55rem;
+      border-radius: 20px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: #999;
+      border-top: 1px solid var(--border);
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="org">Positive Partnerships</div>
+  <h1>AIATSIS Modules — Team Feedback Summary</h1>
+  <div class="subtitle">Prepared for the First Nations Framework Working Group</div>
+  <div class="meta">Source: Module Review Padlet &nbsp;|&nbsp; 10 Modules + 5 Units &nbsp;|&nbsp; Compiled April 2026</div>
+</header>
+
+<nav>
+  <a href="#discussed">What was discussed</a>
+  <a href="#interesting">What was interesting</a>
+  <a href="#questions">Questions raised</a>
+  <a href="#ideas">Ideas shared</a>
+  <a href="#actions-fn">Actions: First Nations autistic young people</a>
+  <a href="#actions-culture">Actions: Our cultural learning</a>
+  <a href="#actions-framework">Actions: First Nations Framework</a>
+  <a href="#modules">Module reference</a>
+</nav>
+
+<div class="container">
+
+  <div class="intro">
+    <p>This document summarises the team's engagement with the <strong>AIATSIS Core Cultural Learning</strong> (10 modules) and <strong>Culturally Responsive Teaching</strong> (5 units) programs, as shared on the Positive Partnerships Padlet review space.</p>
+    <p>Contributors: Jen Cousins, Lynda, Michael, Renee, Rachael, Jess, Deb, Emma D, Vanessa, Rani, and others from the PP team. Contributions span June 2025 to February 2026.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q1 — WHAT WAS DISCUSSED
+  ═══════════════════════════════ -->
+  <div class="section" id="discussed">
+    <div class="section-label">Question 1</div>
+    <h2>What have people discussed in this Padlet?</h2>
+
+    <div class="card">
+      <h3>Identity, belonging and the right to claim heritage</h3>
+      <p>Stan Grant's video "What Part Are You?" sparked the most discussion across the whole Padlet. Contributors reflected on the experience of having one's Aboriginal identity questioned — particularly within Australia but not outside it — and the implicit racism embedded in asking someone to "prove" their heritage. Contributors also discussed how this intersects with financial assumptions and the experience of being perceived as "too white" or "too western."</p>
+    </div>
+
+    <div class="card">
+      <h3>Connection to Country — ways of knowing and being on land</h3>
+      <p>Teams discussed freshwater and saltwater identities, kinship laws, seasonal frameworks, sign language, Kriol, and the complexity of what "connection to Country" really means — including its spiritual dimensions. Personal experiences visiting Country (Budj Bim, Brewarrina fish traps, remote community visits) enriched these discussions.</p>
+    </div>
+
+    <div class="card">
+      <h3>History, trauma and the Stolen Generations</h3>
+      <p>The history modules prompted frank discussion about how recent and ongoing the impact of colonial policies is, the divergent narratives Australians were taught, and why these histories are hard to speak about. The Closing the Gap framework and its structural limitations were also discussed, including parallels with the NDIS.</p>
+    </div>
+
+    <div class="card">
+      <h3>Government policy — intent versus reality</h3>
+      <p>The team worked through the timeline of Commonwealth Indigenous affairs policies, reflecting on how different governments have approached First Nations peoples through legislation — and how these shifts directly affect organisations like PP through funding and tendering cycles.</p>
+    </div>
+
+    <div class="card">
+      <h3>Native Title, Land Rights and legal complexity</h3>
+      <p>This was identified as the most challenging content area. The team discussed the number of title types, the 10–30 year timeline for Native Title claims, the burden of proving "ongoing connection," and the compounding difficulty for people whose first language may not be English. The systemic catch-22 (less contact = better cultural outcome but harder legal navigation) was confronting.</p>
+    </div>
+
+    <div class="card">
+      <h3>Community engagement and the cultural interface</h3>
+      <p>Module 8 generated strong discussion about what genuine community engagement looks like — two-way, circular, not FIFO consultation. The team reflected on PP's own FNCC role and the pre-workshop engagement Skye, Jay and the First Nations reference group undertake.</p>
+    </div>
+
+    <div class="card">
+      <h3>Language, deficit discourse and bias</h3>
+      <p>Across multiple units the team discussed the power of language — Aboriginal English as a full language, codeswitching, the danger of deficit framing, and how unconscious bias operates. Strong connections were made to PP's neurodiversity-affirming language work throughout.</p>
+    </div>
+
+    <div class="card">
+      <h3>Culturally responsive teaching and the hidden curriculum</h3>
+      <p>The Culturally Responsive Teaching units prompted discussion about how teachers embed their values in practice (the "hidden curriculum"), Indigenous pedagogies, UDL alignment, and what it means to make schools ready for students rather than the reverse.</p>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q2 — WHAT WAS INTERESTING
+  ═══════════════════════════════ -->
+  <div class="section" id="interesting">
+    <div class="section-label">Question 2</div>
+    <h2>What have people found interesting?</h2>
+
+    <div class="callout ochre">
+      <div class="ct">Standout insight — shared by multiple contributors</div>
+      <p>Stan Grant's observation that his Aboriginal identity is <strong>never questioned outside Australia</strong> — he is simply accepted as Aboriginal elsewhere in the world. Multiple team members described this as the most memorable moment of the whole learning experience.</p>
+    </div>
+
+    <div class="card">
+      <h3>There have been 67 definitions of Aboriginality since European settlement</h3>
+      <p>This fact surprised several contributors — highlighting how the colonial project has continually attempted to define and redefine identity on its own terms.</p>
+    </div>
+
+    <div class="card">
+      <h3>Freshwater and saltwater identities</h3>
+      <p>New to many contributors — the significance of this distinction within First Nations communities, and how it shapes kinship and identity.</p>
+    </div>
+
+    <div class="card">
+      <h3>The Bundian Way and shared use of Country</h3>
+      <p>Lynda's reflection on how First Nations community shared knowledge of safe coastal routes with early white settlers — an example of generosity and mutual living that challenges dominant narratives of conflict.</p>
+    </div>
+
+    <div class="card">
+      <h3>Budj Bim — the "simple, nomadic, hunters and gatherers" myth</h3>
+      <p>Emma D's experience at the UNESCO-listed Gunditjmara eel farming systems made the falsity of this myth viscerally clear. Their guide's quiet invocation of it as they stood inside the evidence was particularly powerful.</p>
+    </div>
+
+    <div class="card">
+      <h3>Welcome to Country as a passport</h3>
+      <p>Rani's reframing: Welcome to Country is a formal binding allowance by the Owners of Country — it can be limited, denied, and revoked. It also reaches back to ancestors, giving it a deeper intergenerational meaning many contributors had not considered.</p>
+    </div>
+
+    <div class="card">
+      <h3>Aboriginal English as a full language</h3>
+      <p>The unit on language made clear that Aboriginal English has consistent rules and extensive vocabulary, and that speakers are multilingual. Reinforcing this — rather than treating it as "incorrect" English — is essential for dignity and cultural strength.</p>
+    </div>
+
+    <div class="card">
+      <h3>Spinifex grass and the world's strongest, thinnest condoms</h3>
+      <p>Emma D shared this as a fun fact: the sharing of Indigenous knowledge about spinifex grass has led to a research partnership in Queensland producing a new manufacturing material — a tangible example of the contribution of First Nations knowledge to science and industry.</p>
+    </div>
+
+    <div class="card">
+      <h3>Intersecting bias and neurodivergent experience</h3>
+      <p>Rani reflected on the resonances between the experience of being othered as a First Nations person and as a neurodivergent person — and how intersecting biases compound what individuals must push through.</p>
+    </div>
+
+    <div class="card">
+      <h3>The hidden curriculum</h3>
+      <p>The concept that teachers silently signal what "good learning" looks like through their choices — and that this can perpetuate dominant-culture assumptions — was seen as directly relevant to PP's work and to the UDL Framework 3.0.</p>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q3 — QUESTIONS RAISED
+  ═══════════════════════════════ -->
+  <div class="section" id="questions">
+    <div class="section-label">Question 3</div>
+    <h2>What questions do people have?</h2>
+
+    <div class="callout blue">
+      <div class="ct">Reflective question for the Framework (Renee)</div>
+      <p><strong>"What do you think you need to know about land rights, native title or cultural heritage in your work?"</strong> — proposed as a question to include in the Framework document to prompt reflection among PP staff and partners.</p>
+    </div>
+
+    <div class="card">
+      <h3>Could a treaty have prevented the complexity of Native Title?</h3>
+      <p>Emma D found herself wondering whether a treaty would have meant the legal landscape around Land Rights was less fragmented and complex. Raised not as a settled view but as a genuine reflection prompted by the module.</p>
+    </div>
+
+    <div class="card">
+      <h3>When is a question about heritage genuine curiosity vs. a challenge to identity?</h3>
+      <p>Deb offered a thoughtful counterpoint to the Stan Grant discussion: intent and context matter. Not every question about heritage is an attempt to make someone prove themselves — sometimes it is genuine interest. The question raised: how do we hold space for both realities?</p>
+    </div>
+
+    <div class="card">
+      <h3>How do we navigate language when there is no 100% consensus?</h3>
+      <p>Vanessa and Emma D noted that across both First Nations and disability/neurodiversity contexts, there is no single agreed language — and respecting individual choice is paramount. The question is: how do organisations like PP model this in practice?</p>
+    </div>
+
+    <div class="card">
+      <h3>Should PP reach out to specific community groups?</h3>
+      <p>Emma D flagged several groups from the History of Indigenous Education unit as worth contacting — left open as a question for the working group to progress.</p>
+    </div>
+
+    <div class="card">
+      <h3>Should Narragunnawali be linked in PP's PL programs?</h3>
+      <p>Emma D raised the question of whether Reconciliation Australia's <em>Narragunnawali: Reconciliation in Education</em> program should be included as a resource in PP's professional learning offerings.</p>
+    </div>
+
+    <div class="card">
+      <h3>Where do we place the onus when students are "failing"?</h3>
+      <p>The flip question from Unit 3 reframed the issue: <em>"Are Aboriginal and Torres Strait Islander students currently failing at school, or are our schools currently failing Aboriginal and Torres Strait Islander students?"</em> This framing has direct application to PP's work.</p>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q4 — IDEAS SHARED
+  ═══════════════════════════════ -->
+  <div class="section" id="ideas">
+    <div class="section-label">Question 4</div>
+    <h2>What ideas have been shared?</h2>
+
+    <div class="card">
+      <h3>Make the parallels between First Nations and neurodivergent experience explicit in our Framework</h3>
+      <p>Multiple contributors independently identified connections between their learning and PP's work — on deficit discourse, language, bias, being othered, and community engagement. This was not a passing observation; it emerged consistently across many modules and units. The idea: rather than treating these as separate domains, PP's Framework should name and draw on the underlying shared principles.</p>
+    </div>
+
+    <div class="card">
+      <h3>"The process is as important as the outcome" — as a PP value</h3>
+      <p>Emma D highlighted this quote from Module 8 as relevant across all communities PP works with — not just First Nations — and playfully suggested it as a candidate for the next round of PP shirts. More seriously, it points to a value that could be made explicit in the Framework.</p>
+    </div>
+
+    <div class="card">
+      <h3>Use Aboriginal place names more consistently</h3>
+      <p>Renee highlighted this as a simple, low-effort action with meaningful cultural impact — in PP's written materials, event names, and everyday language.</p>
+    </div>
+
+    <div class="card">
+      <h3>Yuendumu cost-benefit model as advocacy evidence</h3>
+      <p>Rani described the Yuendumu analysis as a "win win" — it demonstrates deep personal and cultural benefit from community-controlled funding, expressed in terms that colonial funding systems can also understand. This is useful for PP's advocacy work.</p>
+    </div>
+
+    <div class="card">
+      <h3>Localised processes as a solution to legal complexity</h3>
+      <p>Emma D proposed that localising processes (rather than applying national one-size-fits-all approaches) could help address the complexity of Native Title and cultural heritage — an idea with implications for how PP designs its First Nations engagement processes.</p>
+    </div>
+
+    <div class="card">
+      <h3>Include First Nations reference group voices more explicitly in resources</h3>
+      <p>Emma D flagged a resource development consideration: historically, research about Indigenous peoples was dominated by white male researchers. PP has an opportunity to model a different approach — one that centres First Nations voices in how resources are created and reviewed.</p>
+    </div>
+
+    <div class="card">
+      <h3>Proactive preparation for guest speakers as a named PP practice</h3>
+      <p>The module's guidance on supporting guest speakers (proactively checking for transport, access, refreshment and other needs rather than waiting to be asked) was identified as something PP already does well — and should be explicitly named in the Framework as a standard practice.</p>
+    </div>
+
+    <div class="card">
+      <h3>Sky in Acknowledgements of Country</h3>
+      <p>Emma D's small but meaningful observation: most Acknowledgements of Country reference land, sea and waterways — but the sky is often omitted. Worth reflecting on in PP's own acknowledgement practice.</p>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q5 — ACTIONS: FIRST NATIONS AUTISTIC YOUNG PEOPLE
+  ═══════════════════════════════ -->
+  <div class="section" id="actions-fn">
+    <div class="section-label">Question 5</div>
+    <h2>Actions to apply to our work supporting First Nations autistic young people</h2>
+
+    <div class="callout green">
+      <div class="ct">Key principle from the learning</div>
+      <p>"What works for Indigenous students will support all students" — and we would add: the reverse is also true. What supports autistic young people in culturally safe ways draws on the same underlying principles as what supports First Nations young people. This intersection is where PP's unique value lies.</p>
+    </div>
+
+    <div class="action-grid">
+      <div class="action-item">
+        <div class="ai-label">Language practice</div>
+        <p>Apply neurodiversity-affirming language principles alongside First Nations language principles — both resist deficit framing, both require respecting individual and community choice. Brief staff on how these overlap in practice.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Identity and belonging</div>
+        <p>Recognise that First Nations autistic young people may face compounding experiences of being "othered" — having both their identity and their neurology questioned or doubted. PP's resources and programs should validate identity without requiring proof.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Strengths-based framing</div>
+        <p>Consistently use strength-based language in all communications. Avoid deficit framing of both First Nations communities and autistic young people — and name this as a deliberate, connected practice.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Hidden curriculum</div>
+        <p>Review PP's programs and resources for hidden curriculum assumptions — what do our materials implicitly signal about what "good" participation, communication or family life looks like? Audit with a First Nations and neurodiversity lens.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Community engagement process</div>
+        <p>Pre-workshop community engagement (as undertaken by Skye, Jay and the First Nations reference group) should be understood by all PP staff as essential — not optional preparation. The process is as important as the workshop itself.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Cultural safety in programs</div>
+        <p>Draw on the two-way, circular engagement model from Module 8 to ensure PP's programs create genuine cultural safety — not just checkbox inclusion. Every step should be bidirectional.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Resources reflecting community voices</div>
+        <p>Prioritise First Nations autistic voices in resource development. Establish review processes that centre these voices, informed by the Unit 4 guide on selecting and evaluating resources.</p>
+      </div>
+      <div class="action-item">
+        <div class="ai-label">Connection to Country in programs</div>
+        <p>Where possible, incorporate connection to Country content into PP's programs — recognising that for First Nations young people, cultural identity and Country are inseparable from wellbeing and belonging.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q6 — ACTIONS: OUR CULTURAL LEARNING
+  ═══════════════════════════════ -->
+  <div class="section" id="actions-culture">
+    <div class="section-label">Question 6</div>
+    <h2>Actions to apply to our own cultural learning</h2>
+
+    <div class="action-grid">
+      <div class="action-item blue-top">
+        <div class="ai-label">Commit to ongoing unlearning</div>
+        <p>Treat cultural learning as a continuous process of unlearning, not a one-time training. Create regular team touchpoints to share new insights — the Padlet model worked well and should continue.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Use Aboriginal place names</div>
+        <p>Begin incorporating Aboriginal place names into PP's everyday language — in emails, event references, and communications. Start with the places PP works most regularly.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Revisit and refresh Acknowledgements of Country</div>
+        <p>Reflect on PP's own Acknowledgement practice. Consider including the sky. Review whether our Acknowledgements are living statements of commitment or rote recitations.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Watch: In My Blood It Runs</div>
+        <p>Pre-2020 staff may not have seen this documentary (available on Binge and Apple TV), referenced in Unit 5. Consider as a team learning activity — especially Margaret Kemarre Turner's challenge to make schools ready for children.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Visit Country where possible</div>
+        <p>Multiple contributors noted that direct experiences on Country were among the most powerful learning moments (Budj Bim, remote community visits, walking on Country with FPDN). Build in opportunities for team members to access these experiences.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Reflect on our own bias regularly</div>
+        <p>Unconscious bias work is ongoing. The Unit 1 reflection that 3 in 4 Australians hold negative bias against First Nations people applies to us too. Build structured bias reflection into team practice.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Explore the Healing Foundation's Stolen Generations map</div>
+        <p>Use the corrected link: <a href="https://healingfoundation.org.au/stolen-generations/institutions-map/" target="_blank">healingfoundation.org.au/stolen-generations/institutions-map</a> — a powerful resource for understanding the geographic and institutional scope of the Stolen Generations.</p>
+      </div>
+      <div class="action-item blue-top">
+        <div class="ai-label">Explore BOM's Indigenous weather knowledge</div>
+        <p>Emma D saved this link for the team: <a href="https://www.bom.gov.au/resources/indigenous-weather-knowledge" target="_blank">bom.gov.au/resources/indigenous-weather-knowledge</a> — a useful resource connecting Country, seasons and Indigenous knowledge systems.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       Q7 — ACTIONS: FIRST NATIONS FRAMEWORK
+  ═══════════════════════════════ -->
+  <div class="section" id="actions-framework">
+    <div class="section-label">Question 7</div>
+    <h2>Actions to apply to our First Nations Framework</h2>
+
+    <div class="callout purple">
+      <div class="ct">Overall direction</div>
+      <p>The team's learning strongly suggests the Framework update should: (1) make explicit the connections between First Nations and neurodiversity principles, (2) embed process as a value — not just outcome, (3) centre self-determination and community control as organising principles, and (4) include practical tools and reflective questions for staff.</p>
+    </div>
+
+    <div class="card">
+      <h3>Add a Glossary of key terms</h3>
+      <p>Emma D (Unit 1) flagged the Glossary from the Confronting Bias unit as a strong candidate for inclusion in the Framework document — ensuring shared language across the team and partners.</p>
+    </div>
+
+    <div class="card">
+      <h3>Include the cultural interface and engagement process model</h3>
+      <p>The two-way, circular engagement graphic from Module 8 should be incorporated with references. This is particularly relevant for PP's pre-workshop engagement approach and for PP5 planning.</p>
+    </div>
+
+    <div class="card">
+      <h3>Add a reflective question on land rights and native title</h3>
+      <p>Renee's proposed question: <em>"What do you think you need to know about land rights, native title or cultural heritage in your work?"</em> — for inclusion as a staff reflection prompt.</p>
+    </div>
+
+    <div class="card">
+      <h3>Incorporate content from Module 3 around January 26</h3>
+      <p>Renee flagged, following Framework working group discussions in January 2026, that Module 3 (History Lives in Us) contains content relevant to communications around 26 January. This should be reviewed and incorporated appropriately.</p>
+    </div>
+
+    <div class="card">
+      <h3>Name "process is as important as outcome" as a PP value</h3>
+      <p>This principle — drawn from Module 8 — applies across all PP's work with communities. The Framework should make it explicit.</p>
+    </div>
+
+    <div class="card">
+      <h3>Explicitly connect First Nations and neurodiversity-affirming principles</h3>
+      <p>Deficit discourse, language, identity, bias and community engagement all surface as shared principles across both areas of PP's work. The Framework should name this connection — it is not just an analogy, it reflects shared underlying values.</p>
+    </div>
+
+    <div class="card">
+      <h3>Include the resource evaluation guide</h3>
+      <p>The foundational considerations framework from Unit 4 (Selecting Resources) should inform PP's resource development and selection processes — particularly for the First Nations reference group.</p>
+    </div>
+
+    <div class="card">
+      <h3>Name proactive guest speaker support as a PP standard</h3>
+      <p>PP already does this well. The Framework should document it explicitly: proactively checking for and arranging transport, access, refreshments and other needs — not waiting to be asked.</p>
+    </div>
+
+    <div class="card">
+      <h3>Reference YASA/SAFT and mental health links</h3>
+      <p>Emma D flagged strong links in Module 10 to YASA/SAFT and mental health content that should be acknowledged in the Framework.</p>
+    </div>
+
+    <div class="card">
+      <h3>Consider Narragunnawali for PL programs</h3>
+      <p>Reconciliation Australia's <em>Narragunnawali: Reconciliation in Education</em> program could be linked in PP's professional learning offerings.</p>
+    </div>
+
+    <div class="card">
+      <h3>Advocate for community-controlled funding models</h3>
+      <p>The Yuendumu cost-benefit evidence from Module 5 supports PP's advocacy for directing funding to Aboriginal Community Controlled Organisations. The Framework should reflect this as a principled position.</p>
+    </div>
+
+    <div class="card">
+      <h3>Use Aboriginal place names in all PP communications</h3>
+      <p>A simple, consistent practice. The Framework should name this as a standard expectation.</p>
+    </div>
+
+  </div>
+
+
+  <hr class="divider">
+
+
+  <!-- ══════════════════════════════
+       MODULE REFERENCE
+  ═══════════════════════════════ -->
+  <div class="section" id="modules">
+    <div class="section-label">Reference</div>
+    <h2>Module-by-Module Notes</h2>
+    <p style="font-size:0.93rem; color:var(--mid); margin-bottom:1.2rem;">Expand each module to read the team's detailed reflections.</p>
+
+    <details>
+      <summary>Module 1 — Thinking About Cultures and Identities</summary>
+      <div class="details-body">
+        <p>Stan Grant's video "What Part Are You?" was a standout. His identity is never questioned outside Australia — only at home is he asked to "prove" it. Multiple contributors found this the most powerful moment of the whole learning program.</p>
+        <p>The module introduced <strong>cultural blindness</strong> and <strong>deficit discourse</strong>. The fact that there have been 67 definitions of Aboriginality since European settlement surprised several contributors. Deb offered a nuanced view: intent and context matter when asking questions — genuine curiosity should be distinguished from challenge or judgement.</p>
+        <blockquote>"You can be 'too white' — links to experiences shared by the DC team of being 'too western'."<cite>— Emma D</cite></blockquote>
+        <div class="tags"><span class="tag">Identity</span><span class="tag">Language</span><span class="tag">Deficit Discourse</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 2 — My Country, Our Country</summary>
+      <div class="details-body">
+        <p>Freshwater and saltwater identities, kinship laws, seasonal frameworks, gesture/sign language, and the growing use of Kriol among under-29s were all new insights for contributors. Personal experiences on Country enriched the discussion significantly — from Budj Bim's eel farming systems to a three-hour drive to seek an Elder's permission for artwork use.</p>
+        <blockquote>"There is so much unlearning and relearning when taking on this work."<cite>— Renee</cite></blockquote>
+        <div class="tags"><span class="tag">Country</span><span class="tag">Kinship</span><span class="tag">Language</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 3 — History Lives in Us</summary>
+      <div class="details-body">
+        <p>Deep emotional responses to Stolen Generations content. Charlie Perkins' quote resonated widely. Renee flagged this module's relevance to Framework communications around 26 January.</p>
+        <blockquote>"We know we cannot live in the past, but we must recognise how the past lives in us."<cite>— Charlie Perkins</cite></blockquote>
+        <p><em>Note: The Healing Foundation map link in the module is broken. Correct link: <a href="https://healingfoundation.org.au/stolen-generations/institutions-map/" target="_blank">healingfoundation.org.au/stolen-generations/institutions-map</a></em></p>
+        <div class="tags"><span class="tag">Stolen Generations</span><span class="tag">Historical Trauma</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 4 — Too Much or Not Enough Change: Commonwealth Indigenous Affairs</summary>
+      <div class="details-body">
+        <p>The government policy timeline was valuable for understanding the intent versus reality of successive approaches. Contributors noted the free movement maritime agreement between PNG and Australia, and reflected on how policy shifts affect PP's own funding and tendering context.</p>
+        <div class="tags"><span class="tag">Policy</span><span class="tag">Legislation</span><span class="tag">Funding</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 5 — Communities in Control</summary>
+      <div class="details-body">
+        <p>The Yuendumu cost-benefit analysis — showing the value of directing funding to community control — was widely noted. Emma D added visuals of ACCO interconnectedness and a Reconciliation Australia graphic guide.</p>
+        <blockquote>"The changes are deep and personal and can also be justified in colonial funding terms — win win."<cite>— Rani</cite></blockquote>
+        <div class="tags"><span class="tag">Community Control</span><span class="tag">ACCOs</span><span class="tag">Self-Determination</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 6 — Rights to Country</summary>
+      <div class="details-body">
+        <p>The most legally challenging module. 10–30 year Native Title claim timelines, many Elders not living to see completion, and the burden of proving "ongoing connection" in English (which may be a third, fourth or fifth language) were confronting. Emma D noted a new Native Title map of Australia as a powerful alternative lens.</p>
+        <p>Renee proposed two Framework actions: include a reflective question on land rights, and commit to using Aboriginal place names consistently.</p>
+        <div class="tags"><span class="tag">Native Title</span><span class="tag">Land Rights</span><span class="tag">Place Names</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 7 — Self-Determination and Autonomy</summary>
+      <div class="details-body">
+        <p>The nation building vs. capacity-focused governance table was a clear and practical highlight. Emma D added a summary of this comparison for the team.</p>
+        <div class="tags"><span class="tag">Self-Determination</span><span class="tag">Governance</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 8 — Engaging with Aboriginal and Torres Strait Islander Communities</summary>
+      <div class="details-body">
+        <p>The <strong>cultural interface</strong> concept, the two-way circular engagement model, and the valid criticism of FIFO consultation generated the most discussion relevant to PP's day-to-day work. Emma D drew direct links to the FNCC role and to PP5 planning.</p>
+        <blockquote>"The process is as important as the outcome."</blockquote>
+        <blockquote>"Working with Aboriginal and Torres Strait Islander communities… is not 'rocket science'."</blockquote>
+        <div class="tags"><span class="tag">Cultural Interface</span><span class="tag">Engagement</span><span class="tag">FNCC</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 9 — Helping to Build and Inspire the Australian Nation</summary>
+      <div class="details-body">
+        <p>Cultural celebration vs. exploitation; cultural tourism; the spinifex/condom innovation as a concrete example of Indigenous knowledge contributing to modern science and industry.</p>
+        <div class="tags"><span class="tag">Cultural Celebration</span><span class="tag">Indigenous Knowledge</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Module 10 — Continuing Your Journey</summary>
+      <div class="details-body">
+        <p>Closing touchstone: <em>"recognising and responding to the different ways of knowing, doing and being."</em> Emma D flagged links to YASA/SAFT and mental health content, and suggested acknowledging these in the Framework.</p>
+        <div class="tags"><span class="tag">Ways of Knowing</span><span class="tag">Ongoing Learning</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Unit 1 — Confronting Bias (Culturally Responsive Teaching)</summary>
+      <div class="details-body">
+        <p>Statistics on teenage discrimination experiences (scary), the 3-in-4 bias figure, resume name research, Welcome to Country as a passport, and Rani's reflection on intersecting neurodivergent and First Nations experiences of being othered.</p>
+        <p>Emma D suggested the Glossary from this unit for the Framework document.</p>
+        <div class="tags"><span class="tag">Bias</span><span class="tag">Welcome to Country</span><span class="tag">Neurodiversity</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Unit 2 — History of Indigenous Education</summary>
+      <div class="details-body">
+        <p>Indigenous pedagogies, Closing the Gap critique, the NDIS parallel, Hyllus Maris and Deadly Science. Emma D flagged groups worth reaching out to from this unit.</p>
+        <div class="tags"><span class="tag">Pedagogy</span><span class="tag">Policy History</span><span class="tag">NDIS</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Unit 3 — The Power of Language</summary>
+      <div class="details-body">
+        <p>Aboriginal English as a full language; codeswitching; deficit discourse links to neurodiversity; "Do not prioritise prescriptive grammar over human dignity"; the school-failing-students framing.</p>
+        <div class="tags"><span class="tag">Language</span><span class="tag">Deficit Discourse</span><span class="tag">Neurodiversity</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Unit 4 — Selecting Resources</summary>
+      <div class="details-body">
+        <p>Foundational considerations framework for resource evaluation; historical gender bias in research about Indigenous peoples; PP's good practice around guest speaker support named as something to document explicitly.</p>
+        <div class="tags"><span class="tag">Resources</span><span class="tag">Research Bias</span><span class="tag">Guest Speakers</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Unit 5 — Effective Teaching</summary>
+      <div class="details-body">
+        <p>UDL Framework 3.0 alignment; hidden curriculum; "what works for Indigenous students will support all students"; In My Blood It Runs documentary; Narragunnawali program; links to PP's Storyboard and Planning Tool.</p>
+        <blockquote>"They ask us to make our children ready for school, but why can't we make schools ready for our children?"<cite>— Margaret Kemarre Turner</cite></blockquote>
+        <div class="tags"><span class="tag">Culturally Responsive Teaching</span><span class="tag">UDL</span><span class="tag">Hidden Curriculum</span></div>
+      </div>
+    </details>
+
+  </div>
+
+</div>
+
+<footer>
+  Positive Partnerships &nbsp;|&nbsp; AIATSIS Module Review Padlet &nbsp;|&nbsp; Compiled April 2026<br>
+  For internal use by the First Nations Framework Working Group
+</footer>
+
+</body>
+</html>
